@@ -1,0 +1,3 @@
+# Ignore Firebase configuration and database files
+firebase-app.js
+firebase-database.js
