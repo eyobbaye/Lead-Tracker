@@ -3,7 +3,7 @@ import { getDatabase } from "./firebase-database.js";
 
 
 const firebaseConfig = {
-  databaseURL: "https://lead-tracker-app-8f73e-default-rtdb.firebaseio.com/",
+  databaseURL: process.env.DATABASE_URL,
   apiKey: "AIzaSyD79_z0tdFvAFyDxSooRSF3MQdCEXzARNE",
   authDomain: "lead-tracker-app-8f73e.firebaseapp.com",
   projectId: "lead-tracker-app-8f73e",
