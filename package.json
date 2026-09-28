@@ -1,0 +1,21 @@
+{
+  "name": "lead-tracker",
+  "version": "1.0.0",
+  "description": "Install the dependencies and run the project ``` npm install npm start ``` Lead Tracker Lead Tracker is a small extension for Chrome built with JavaScript that uses both the Chrome Tabs API and local storage/ firebase to save and store URLs in browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "run": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^12.19.0"
+  },
+  "devDependencies": {
+    "vite": "^8.3.1"
+  }
+}

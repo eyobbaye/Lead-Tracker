@@ -1,37 +1,57 @@
+import { initializeApp } from "firebase/app";
+import {
+  getDatabase,
+  ref,
+  push,
+  onValue,
+} from "firebase/database";
 
-const inputBtn = document.getElementById("btn-el");
+const firebaseConfig = {
+  databaseURL: "https://lead-tracker-app-8f73e-default-rtdb.firebaseio.com/",
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const referenceInDB = ref(database, "leads");
+
 const inputEl = document.getElementById("input-el");
-const unorderList = document.getElementById("ul-el");
-const container = document.getElementById("container");
-const deleteBtn = document.querySelector("#delete-el");
-const tabBtn = document.querySelector("#tab-el");
+const inputBtn = document.getElementById("input-btn");
+const ulEl = document.getElementById("ul-el");
+const deleteBtn = document.getElementById("delete-btn");
 
-// tabBtn.addEventListener("click", function () {
-//   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-//     const currentTab = tabs[0];
-//     myLeads.push(currentTab.url);
-//     render(myLeads);
-//   });
-// });
-inputBtn.addEventListener("click", function () {
-  inputEl.value.trim().length === 0
-    ? alert("Please fill the input")
-    : console.log(inputEl.value);
-  inputEl.value = "";
-});
-deleteBtn.addEventListener("dblclick", (event) => {
- 
-
-});
 function render(leads) {
   let listItems = "";
   for (let i = 0; i < leads.length; i++) {
     listItems += `
-                  <li>
-                    <a href='${leads[i]}' target='_blank'> 
-                        ${leads[i]}
-                    </a>
-                  </li> `;
+            <li>
+                <a target='_blank' href='${leads[i]}'>
+                    ${leads[i]}
+                </a>
+            </li>
+        `;
   }
-  unorderList.innerHTML = listItems;
+  ulEl.innerHTML = listItems;
 }
+
+onValue(referenceInDB, function (snapshot){
+  const leads = Object.values(snapshot.val() || {});
+  render(leads);
+  console.log(snapshot.val());
+});
+
+deleteBtn.addEventListener("dblclick", function () {
+  ulEl.innerHTML = "";
+  remove(referenceInDB);
+  
+});
+
+inputBtn.addEventListener("click", function () {
+  console.log("btn clicked");
+  push(referenceInDB, inputEl.value);
+  // push(referenceInDB, {
+  //   value: inputEl.value,
+  //   timestamp: Date.now(),
+  // });
+  console.log(inputEl.value);
+  inputEl.value = "";
+});
