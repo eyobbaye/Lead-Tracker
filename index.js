@@ -1,13 +1,9 @@
+
 import { initializeApp } from "firebase/app";
-import {
-  getDatabase,
-  ref,
-  push,
-  onValue,
-} from "firebase/database";
+import { getDatabase, ref, push, onValue } from "firebase/database";
 
 const firebaseConfig = {
-  databaseURL: "https://lead-tracker-app-8f73e-default-rtdb.firebaseio.com/",
+  databaseURL:import.meta.env.VITE_DB_URL,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -33,7 +29,7 @@ function render(leads) {
   ulEl.innerHTML = listItems;
 }
 
-onValue(referenceInDB, function (snapshot){
+onValue(referenceInDB, function (snapshot) {
   const leads = Object.values(snapshot.val() || {});
   render(leads);
   console.log(snapshot.val());
@@ -42,7 +38,6 @@ onValue(referenceInDB, function (snapshot){
 deleteBtn.addEventListener("dblclick", function () {
   ulEl.innerHTML = "";
   remove(referenceInDB);
-  
 });
 
 inputBtn.addEventListener("click", function () {
