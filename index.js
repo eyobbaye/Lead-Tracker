@@ -1,6 +1,15 @@
 
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, push, onValue } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  push,
+  onValue,
+  remove,
+  forceWebSockets,
+} from "firebase/database";
+
+forceWebSockets();
 
 const firebaseConfig = {
   databaseURL:import.meta.env.VITE_DB_URL,
@@ -28,15 +37,17 @@ function render(leads) {
   }
   ulEl.innerHTML = listItems;
 }
-
+// render all items using onValue
 onValue(referenceInDB, function (snapshot) {
+  // turn the object into array
   const leads = Object.values(snapshot.val() || {});
   render(leads);
-  console.log(snapshot.val());
 });
 
 deleteBtn.addEventListener("dblclick", function () {
+  //remove from the UI
   ulEl.innerHTML = "";
+  //remove from the DB
   remove(referenceInDB);
 });
 

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "version": "1.0",
   "name": "Leads tracker",
-  "permissions": ["tabs", "storage", "activeTab"],
+  "permissions": ["tabs", "storage", "activeTab", "host_permissions"],
 
   "action": {
     "default_popup": "index.html",
