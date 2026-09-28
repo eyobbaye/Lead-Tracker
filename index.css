@@ -1,10 +1,13 @@
 body{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  margin: 0;
+  margin: 0 auto;
   padding: 10px;
   background-color: #DDEAE1;
-  min-width: 400px;
+  min-width: 300px;
 
+}
+label{
+  color:#5f9341
 }
 input{
   width: 100%;
@@ -45,4 +48,133 @@ a {
     color: #5f9341;
     font-weight: bold;
 
+}
+/* Lead list item card */
+li.lead-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2ebe4;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+li.lead-item:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Link typography */
+li.lead-item a {
+  flex: 1;
+  word-break: break-all;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #3b6b24;
+  text-decoration: none;
+}
+
+li.lead-item a:hover {
+  text-decoration: underline;
+}
+
+/* Editing state background */
+li.lead-item.editing {
+  background-color: #f7faf8;
+  border-color: #5f9341;
+}
+
+/* Edit mode input box */
+.edit-input {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1.5px solid #5f9341;
+  border-radius: 6px;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.edit-input:focus {
+  box-shadow: 0 0 0 2px rgba(95, 147, 65, 0.25);
+}
+
+/* Button group container */
+.btn-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Override default button styles for all action buttons */
+.btn-group button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+/* Icon Buttons: Edit & Delete */
+.btn-group .edit-btn,
+.btn-group .delete-item-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+}
+
+.btn-group .edit-btn {
+  background-color: #eef5eb;
+  border: 1px solid #d5e5cf;
+}
+
+.btn-group .edit-btn:hover {
+  background-color: #dceecd;
+  transform: translateY(-1px);
+}
+
+.btn-group .delete-item-btn {
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
+.btn-group .delete-item-btn:hover {
+  background-color: #fca5a5;
+  transform: translateY(-1px);
+}
+
+/* Action text buttons: Save & Cancel */
+.btn-group .save-btn,
+.btn-group .cancel-btn {
+  padding: 6px 12px;
+  height: 30px;
+  font-size: 13px;
+}
+
+.btn-group .save-btn {
+  background-color: #5f9341;
+  color: #ffffff;
+}
+
+.btn-group .save-btn:hover {
+  background-color: #4b7734;
+}
+
+.btn-group .cancel-btn {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.btn-group .cancel-btn:hover {
+  background-color: #d1d5db;
 }
