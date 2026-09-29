@@ -24,10 +24,17 @@ button{
   background-color: #5f9341;
   color:#fff;
   border: none;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: 1px solid #5f9341;
   margin-top: 5px;
   font-weight: bold;
+}
+
+.delete{
+  background-color: #fc5c5c;
+}
+.delete:hover{
+  background-color: #f44336;
 }
 #delete-el{
   background-color: white;
@@ -177,4 +184,18 @@ li.lead-item.editing {
 
 .btn-group .cancel-btn:hover {
   background-color: #d1d5db;
+}
+
+/* lead content */
+.lead-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+.lead-date{
+  font-size: 11px;
+  color: #3b6b24;
+  margin-top: 2px;
+
 }

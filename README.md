@@ -21,7 +21,7 @@ Lead Tracker uses the Chrome Tabs API to get the URL of the active tab. Saving a
 
 You can also manually enter a URL and save it.
 Screenshot
-![Screenshot](/public/Screenshot.png)
+![Screenshot](/public//Screenshot.png)
 
 Instructions
 Go to the page you wish to save.

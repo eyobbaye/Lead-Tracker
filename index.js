@@ -7,6 +7,7 @@ import {
   remove,
   forceWebSockets,
   set,
+  serverTimestamp
 } from "firebase/database";
 
 forceWebSockets();
@@ -21,6 +22,7 @@ const referenceInDB = ref(database, "leads");
 
 const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
+const tabBtn = document.getElementById("tab-btn");
 const ulEl = document.getElementById("ul-el");
 const deleteBtn = document.getElementById("delete-btn");
 
@@ -32,7 +34,16 @@ let editingId = null;
 function render(leads) {
   let listItems = "";
   for (let i = 0; i < leads.length; i++) {
-    const [id, url] = leads[i];
+    const [id, item] = leads[i];
+
+    // extract URL from item object
+    const url = typeof item === "object" && item !== null ? item.value : item;
+
+    // format timeStamp
+    const dataStr = typeof item === "object" && item?.timestamp
+      ?
+      new Date(item.timestamp).toLocaleDateString() : "";
+
     if (editingId === id) {
       listItems += `
         <li class="lead-item editing">
@@ -46,7 +57,14 @@ function render(leads) {
     } else {
       listItems += `
         <li class="lead-item">
-          <a href="${url}" target="_blank">${url}</a>
+          <div class="lead-content">
+          <a href="
+          ${url}" target="_blank">${url}</a>
+          ${dataStr ? `<span class="lead-date">
+            ${dataStr}
+            </span>` : ""}
+          </div>
+         
           <div class="btn-group">
             <button class="edit-btn" data-id="${id}" title="Edit">✏️</button>
             <button class="delete-item-btn" data-id="${id}" title="Delete">🗑️</button>
@@ -69,10 +87,26 @@ onValue(referenceInDB, function (snapshot) {
 function saveInput() {
   const value = inputEl.value.trim();
   if (value) {
-    push(referenceInDB, value);
+    // push(referenceInDB, value);
+    push(referenceInDB, {
+      value: value,
+      timestamp: serverTimestamp(),
+    } )
     inputEl.value = "";
   }
 }
+tabBtn.addEventListener("click", function () {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    const activeTab = tabs[0];
+    const url = activeTab.url;
+    if (url) {
+      push(referenceInDB, {
+        value: url,
+        timestamp: serverTimestamp(),
+      });
+    }
+  });
+});
 deleteBtn.addEventListener("dblclick", function () {
   //remove from the UI
   ulEl.innerHTML = "";
