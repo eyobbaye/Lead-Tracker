@@ -1,6 +1,6 @@
 # Ignore Firebase configuration and database files
-firebase-app.js
-firebase-database.js
+firebase-app.js/
+firebase-database.js/
 
 # Operating System Files
 .DS_Store
